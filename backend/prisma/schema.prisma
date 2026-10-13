@@ -1,0 +1,176 @@
+// Anjana Jat Mahasabha — Backend Database Schema
+// Dev: SQLite  |  Prod: PostgreSQL (Vercel Postgres / Neon / Supabase)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── ADMIN ───────────────────────────────────────────────
+model Admin {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  role         String     @default("ADMIN") // SUPER_ADMIN | ADMIN | EDITOR | VIEWER
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  auditLogs    AuditLog[]
+}
+
+// ─── MEMBER ──────────────────────────────────────────────
+model Member {
+  id             String    @id @default(cuid())
+  memberId       String    @unique // AJM-YYYY-XXXX format, generated server-side
+  name           String
+  fatherOrSpouse String?
+  gotra          String
+  village        String
+  district       String
+  state          String
+  occupation     String?
+  bloodGroup     String?
+  contact        String
+  photoUrl       String?
+  status         String    @default("PENDING") // PENDING | APPROVED | REJECTED
+  reviewedBy     String?
+  reviewedAt     DateTime?
+  reviewNote     String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+// ─── AUDIT LOG ───────────────────────────────────────────
+// Immutable-style: no update/delete operations should target this table.
+model AuditLog {
+  id         String   @id @default(cuid())
+  action     String   // e.g. MEMBER_APPROVED, ADMIN_LOGIN_SUCCESS
+  targetType String   // e.g. MEMBER, ANNOUNCEMENT, ADMIN, PAYMENT
+  targetId   String?
+  metadata   String?  // Safe JSON metadata — NEVER contains passwords/tokens
+  adminId    String
+  admin      Admin    @relation(fields: [adminId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+// ─── ANNOUNCEMENT ────────────────────────────────────────
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  titleHi     String?
+  content     String
+  isPublished Boolean  @default(false)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── UPI SUBMISSION ──────────────────────────────────────
+model UpiSubmission {
+  id          String    @id @default(cuid())
+  utrNumber   String    @unique
+  orderId     String
+  donorName   String
+  email       String
+  phone       String
+  amount      Float
+  category    String
+  status      String    @default("PENDING_ADMIN_REVIEW") // PENDING_ADMIN_REVIEW | VERIFIED | REJECTED
+  reviewNote  String?
+  reviewedBy  String?
+  submittedAt DateTime  @default(now())
+  reviewedAt  DateTime?
+  ipAddress   String?
+}
+
+// ─── DONATION ORDER ──────────────────────────────────────
+model DonationOrder {
+  id                 String   @id @default(cuid())
+  orderId            String   @unique
+  amount             Int      // In paise
+  currency           String   @default("INR")
+  category           String
+  donorName          String
+  email              String
+  phone              String
+  status             String   @default("PENDING") // PENDING | SUCCESS | FAILED
+  razorpayPaymentId  String?
+  razorpaySignature  String?
+  isDemo             Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+// ─── GOTRA ───────────────────────────────────────────────
+model Gotra {
+  id        String   @id // e.g. "solanki"
+  en        String
+  hi        String
+  gu        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── GOTRA SUBMISSION ────────────────────────────────────
+model GotraSubmission {
+  id          String    @id @default(cuid())
+  nameEn      String
+  nameHi      String?
+  nameGu      String?
+  submittedBy String?
+  contact     String?
+  village     String?
+  status      String    @default("PENDING") // PENDING | APPROVED | REJECTED
+  reviewedBy  String?
+  reviewedAt  DateTime?
+  reviewNote  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// ─── DIRECTORY LOCATION ──────────────────────────────────
+model DirectoryLocation {
+  id          String   @id @default(cuid())
+  stateKey    String   // gujarat | mp | rajasthan
+  stateNameEn String
+  stateNameHi String
+  stateNameGu String?
+  districtEn  String
+  districtHi  String
+  districtGu  String?
+  talukaEn    String
+  talukaHi    String
+  talukaGu    String?
+  villageEn   String
+  villageHi   String
+  villageGu   String?
+  famousHub   String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── EVENT ───────────────────────────────────────────────
+model Event {
+  id               String   @id @default(cuid())
+  title            String
+  titleHi          String?
+  description      String
+  date             String
+  time             String?
+  location         String
+  category         String   @default("meeting") // conference | cultural | sports | seminar | meeting | social
+  image            String?
+  isUpcoming       Boolean  @default(true)
+  isPublished      Boolean  @default(true)
+  registrationLink String?
+  createdBy        String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+

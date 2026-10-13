@@ -1,0 +1,25 @@
+.oxcode-memory/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Next.js
+website/.next/
+website/out/
+
+# Backend Build
+backend/dist/
+backend/node_modules/
+
+# Local databases
+*.db
+*.db-journal
+dev.db*
+
+# Environment secrets
+.env
+.env.local
+backend/.env
+!backend/.env.example
+!website/.env.example
