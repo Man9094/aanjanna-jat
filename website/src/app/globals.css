@@ -126,6 +126,23 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keeps anchor targets clear of the sticky header */
+  scroll-padding-top: 5.5rem;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
@@ -225,4 +242,59 @@ body {
   background: linear-gradient(90deg, var(--muted) 25%, var(--border-color) 50%, var(--muted) 75%);
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
+}
+
+/* ===== GOOGLE TRANSLATE OVERRIDES ===== */
+.goog-te-banner-frame,
+.goog-te-banner,
+.goog-te-balloon-frame,
+.VIpgJd-Z44wsf-O3w-sf {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+  position: static !important;
+}
+#google_translate_element,
+.goog-te-gadget {
+  display: none !important;
+  visibility: hidden !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ===== VERTICAL & HORIZONTAL MARQUEE ANIMATIONS ===== */
+@keyframes marqueeUp {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes marqueeDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0%); }
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-up {
+  animation: marqueeUp 72s linear infinite;
+}
+
+.animate-marquee-down {
+  animation: marqueeDown 72s linear infinite;
+}
+
+.animate-marquee-left {
+  animation: marqueeLeft 48s linear infinite;
+}
+
+.animate-marquee-up:hover,
+.animate-marquee-down:hover,
+.animate-marquee-left:hover {
+  animation-play-state: paused;
 }

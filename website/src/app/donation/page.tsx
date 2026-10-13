@@ -134,7 +134,7 @@ export default function DonationPage() {
                   <span className="text-muted-foreground">Bank Name</span>
                   <span className="text-foreground font-medium">State Bank of India</span>
                   <span className="text-muted-foreground">Account Name</span>
-                  <span className="text-foreground font-medium">Aanjana Jat Mahasabha</span>
+                  <span className="text-foreground font-medium">Anjana Jat Mahasabha</span>
                   <span className="text-muted-foreground">Account No.</span>
                   <span className="text-foreground font-medium">XXXX XXXX XXXX 1234</span>
                   <span className="text-muted-foreground">IFSC Code</span>

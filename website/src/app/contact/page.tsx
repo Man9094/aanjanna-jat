@@ -29,7 +29,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-foreground">Office Address</h4>
-                      <p className="text-sm text-muted-foreground">Aanjana Bhawan, Gandhi Nagar,<br />Jaipur, Rajasthan - 302015</p>
+                      <p className="text-sm text-muted-foreground">Anjana Bhawan, Gandhi Nagar,<br />Jaipur, Rajasthan - 302015</p>
                     </div>
                   </motion.div>
 
@@ -124,7 +124,7 @@ export default function ContactPage() {
             <div className="text-center">
               <MapPin size={48} className="text-saffron/30 mx-auto mb-3" />
               <p className="text-muted-foreground text-sm">Interactive Google Map</p>
-              <p className="text-xs text-muted-foreground">Aanjana Bhawan, Gandhi Nagar, Jaipur</p>
+              <p className="text-xs text-muted-foreground">Anjana Bhawan, Gandhi Nagar, Jaipur</p>
             </div>
           </div>
         </div>

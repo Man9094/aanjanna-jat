@@ -19,6 +19,11 @@ export default function EventsPreview() {
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {upcomingEvents.length === 0 && (
+            <p className="col-span-full rounded-2xl border border-dashed border-border bg-card px-6 py-12 text-center text-sm text-muted-foreground">
+              No events have been published yet.
+            </p>
+          )}
           {upcomingEvents.map((event, index) => (
             <EventCard key={event.id} event={event} index={index} />
           ))}

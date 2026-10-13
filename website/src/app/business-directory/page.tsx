@@ -17,7 +17,7 @@ export default function BusinessDirectoryPage() {
       <PageHero
         title="Business Directory"
         titleHi="व्यापार निर्देशिका"
-        subtitle="Support community businesses. Find and connect with Aanjana Jat entrepreneurs."
+        subtitle="Support community businesses. Find and connect with Anjana Jat entrepreneurs."
         breadcrumbs={[{ label: "Business Directory", href: "/business-directory" }]}
       />
 

@@ -132,14 +132,14 @@ export default function Footer() {
               <Link href="/" className="flex items-center gap-3 mb-5 group">
                 <Image
                   src="/logo.png"
-                  alt="Aanjana Jat Mahasabha Logo"
+                  alt="Anjana Jat Mahasabha Logo"
                   width={48}
                   height={48}
                   className="w-12 h-12 rounded-full object-cover shadow-md group-hover:scale-105 transition-transform duration-300 border border-saffron/20"
                 />
                 <div>
                   <h2 className="text-lg font-bold text-foreground">
-                    Aanjana Jat Mahasabha
+                    Anjana Jat Mahasabha
                   </h2>
                   <p className="text-xs text-muted-foreground font-devanagari">
                     आंजना जाट महासभा
@@ -160,7 +160,7 @@ export default function Footer() {
                   className="flex items-start gap-3 text-sm text-muted-foreground hover:text-saffron transition-colors"
                 >
                   <MapPin size={16} className="mt-0.5 shrink-0 text-saffron" />
-                  <span>Aanjana Bhawan, Gandhi Nagar,<br />Jaipur, Rajasthan - 302015</span>
+                  <span>Anjana Bhawan, Gandhi Nagar,<br />Jaipur, Rajasthan - 302015</span>
                 </a>
                 <a
                   href="mailto:info@aanjanajatmahasabha.org"
@@ -251,7 +251,7 @@ export default function Footer() {
         <div className="border-t border-border">
           <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-muted-foreground text-center sm:text-left">
-              © {new Date().getFullYear()} Aanjana Jat Mahasabha. All rights reserved.
+              © {new Date().getFullYear()} Anjana Jat Mahasabha. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
               <Link href="#" className="hover:text-saffron transition-colors">
@@ -281,7 +281,7 @@ export default function Footer() {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/?text=Hello%20Aanjana%20Jat%20Mahasabha"
+        href="https://wa.me/?text=Hello%20Anjana%20Jat%20Mahasabha"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"

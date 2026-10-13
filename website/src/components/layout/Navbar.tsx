@@ -29,6 +29,8 @@ const navLinks = [
       { label: "About Us", href: "/about", description: "Our vision, mission & values" },
       { label: "Our History", href: "/history", description: "Heritage & milestones" },
       { label: "Leadership", href: "/leadership", description: "Committee & office bearers" },
+      { label: "Community Members", href: "/community-members", description: "State office bearers" },
+      { label: "Villages & Regions", href: "/villages", description: "Community villages across GJ, MP & RJ" },
     ],
   },
   {
@@ -142,17 +144,17 @@ export default function Navbar() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6" aria-label="Main navigation">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group" aria-label="Aanjana Jat Mahasabha Home">
+            <Link href="/" className="flex items-center gap-3 group" aria-label="Anjana Jat Mahasabha Home">
               <Image
                 src="/logo.png"
-                alt="Aanjana Jat Mahasabha Logo"
+                alt="Anjana Jat Mahasabha Logo"
                 width={48}
                 height={48}
                 className="w-10 h-10 lg:w-12 lg:h-12 rounded-full object-cover shadow-md group-hover:scale-105 transition-transform duration-300 border border-saffron/20"
               />
               <div className="hidden sm:block">
                 <h1 className="text-base lg:text-lg font-bold text-foreground leading-tight">
-                  Aanjana Jat Mahasabha
+                  Anjana Jat Mahasabha
                 </h1>
                 <p className="text-[10px] lg:text-xs text-muted-foreground font-devanagari">
                   आंजना जाट महासभा

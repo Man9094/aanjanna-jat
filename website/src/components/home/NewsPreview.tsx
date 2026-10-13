@@ -20,6 +20,11 @@ export default function NewsPreview() {
         />
 
         <div className="space-y-8">
+          {newsArticles.length === 0 && (
+            <p className="rounded-2xl border border-dashed border-border bg-card px-6 py-12 text-center text-sm text-muted-foreground">
+              No news or announcements have been published yet.
+            </p>
+          )}
           {featured && <NewsCard article={featured} index={0} featured />}
 
           <div className="grid md:grid-cols-3 gap-6">

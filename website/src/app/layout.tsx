@@ -3,6 +3,7 @@ import { Poppins, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -20,14 +21,14 @@ const devanagari = Noto_Sans_Devanagari({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aanjana Jat Mahasabha | Official Community Organization",
-    template: "%s | Aanjana Jat Mahasabha",
+    default: "Anjana Jat Mahasabha | Official Community Organization",
+    template: "%s | Anjana Jat Mahasabha",
   },
   description:
-    "Aanjana Jat Mahasabha is a premier community organization dedicated to preserving heritage, empowering society through education, social service, and building a brighter future for the Aanjana Jat community.",
+    "Anjana Jat Mahasabha is a premier community organization dedicated to preserving heritage, empowering society through education, social service, and building a brighter future for the Anjana Jat community.",
   keywords: [
-    "Aanjana Jat Mahasabha",
-    "Aanjana Jat",
+    "Anjana Jat Mahasabha",
+    "Anjana Jat",
     "community organization",
     "Jat community",
     "Rajasthan community",
@@ -38,29 +39,29 @@ export const metadata: Metadata = {
     "scholarship",
     "membership",
   ],
-  authors: [{ name: "Aanjana Jat Mahasabha" }],
-  creator: "Aanjana Jat Mahasabha",
+  authors: [{ name: "Anjana Jat Mahasabha" }],
+  creator: "Anjana Jat Mahasabha",
   metadataBase: new URL("https://aanjanajatmahasabha.org"),
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "https://aanjanajatmahasabha.org",
-    siteName: "Aanjana Jat Mahasabha",
-    title: "Aanjana Jat Mahasabha | Official Community Organization",
+    siteName: "Anjana Jat Mahasabha",
+    title: "Anjana Jat Mahasabha | Official Community Organization",
     description:
-      "Preserving Heritage • Empowering Society • Building the Future. Join the Aanjana Jat community's journey of unity and development.",
+      "Preserving Heritage • Empowering Society • Building the Future. Join the Anjana Jat community's journey of unity and development.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Aanjana Jat Mahasabha",
+        alt: "Anjana Jat Mahasabha",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aanjana Jat Mahasabha",
+    title: "Anjana Jat Mahasabha",
     description:
       "Preserving Heritage • Empowering Society • Building the Future",
     images: ["/og-image.jpg"],
@@ -89,14 +90,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Aanjana Jat Mahasabha",
+              name: "Anjana Jat Mahasabha",
               url: "https://aanjanajatmahasabha.org",
               logo: "https://aanjanajatmahasabha.org/logo.png",
               description:
                 "A premier community organization dedicated to preserving heritage, empowering society through education, social service, and community development.",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "Aanjana Bhawan, Gandhi Nagar",
+                streetAddress: "Anjana Bhawan, Gandhi Nagar",
                 addressLocality: "Jaipur",
                 addressRegion: "Rajasthan",
                 postalCode: "302015",
@@ -112,9 +113,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col font-poppins antialiased">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

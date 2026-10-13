@@ -78,6 +78,16 @@ export default function GalleryPage() {
             ))}
           </div>
 
+          {(view === "photos" ? filtered.length === 0 : galleryAlbums.length === 0) && (
+            <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-14 text-center">
+              <Images size={28} className="mx-auto mb-4 text-saffron" />
+              <p className="text-sm text-muted-foreground">
+                No photographs have been published yet. Verified photographs will
+                appear here once the Mahasabha office provides them.
+              </p>
+            </div>
+          )}
+
           {view === "photos" ? (
             /* Photo Grid */
             <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">

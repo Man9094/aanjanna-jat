@@ -15,7 +15,7 @@ const values = [
 ];
 
 const objectives = [
-  "Unite all Aanjana Jat community members under one umbrella organization",
+  "Unite all Anjana Jat community members under one umbrella organization",
   "Promote education and provide scholarships to deserving students",
   "Organize medical camps and healthcare initiatives in rural areas",
   "Support farmers with modern agricultural techniques and market access",
@@ -28,7 +28,7 @@ const objectives = [
 ];
 
 const timelineEvents = [
-  { year: "1948", title: "Foundation", description: "Aanjana Jat Mahasabha was formally established with the goal of community unity and social reform." },
+  { year: "1948", title: "Foundation", description: "Anjana Jat Mahasabha was formally established with the goal of community unity and social reform." },
   { year: "1965", title: "First Convention", description: "The first major community convention held in Jaipur with over 5,000 attendees." },
   { year: "1980", title: "Scholarship Program", description: "Launch of the community scholarship program, initially supporting 50 students annually." },
   { year: "1995", title: "Women Wing", description: "Formation of the Women Wing to champion women's empowerment and education." },
@@ -44,7 +44,7 @@ export default function AboutPageClient() {
       <PageHero
         title="About Us"
         titleHi="हमारे बारे में"
-        subtitle="Dedicated to the unity, development, and empowerment of the Aanjana Jat community since 1948."
+        subtitle="Dedicated to the unity, development, and empowerment of the Anjana Jat community since 1948."
         breadcrumbs={[{ label: "About Us", href: "/about" }]}
       />
 
@@ -64,8 +64,8 @@ export default function AboutPageClient() {
               <div className="section-divider !mx-0 mb-6" />
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  <strong className="text-foreground">Aanjana Jat Mahasabha</strong> is a
-                  premier community organization that has been serving the Aanjana Jat community
+                  <strong className="text-foreground">Anjana Jat Mahasabha</strong> is a
+                  premier community organization that has been serving the Anjana Jat community
                   for over seven decades. Founded in 1948, we are dedicated to uniting community
                   members across India and working towards their collective welfare and development.
                 </p>
@@ -114,7 +114,7 @@ export default function AboutPageClient() {
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">Our Mission</h3>
                     <p className="text-sm text-muted-foreground">
-                      To empower every member of the Aanjana Jat community through accessible
+                      To empower every member of the Anjana Jat community through accessible
                       education, healthcare, economic opportunities, and the preservation of
                       our cultural heritage while fostering unity and mutual support.
                     </p>

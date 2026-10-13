@@ -6,7 +6,7 @@ import { Heart, Search, Shield, ArrowRight } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
 
 const features = [
-  { icon: Heart, title: "Community-Only", description: "Exclusively for verified Aanjana Jat community members" },
+  { icon: Heart, title: "Community-Only", description: "Exclusively for verified Anjana Jat community members" },
   { icon: Search, title: "Advanced Search", description: "Search by education, profession, location, and preferences" },
   { icon: Shield, title: "Privacy & Safety", description: "Strict privacy controls and verified profiles only" },
 ];
