@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { CreditCard, Compass, BookOpen } from "lucide-react";
-import { aanjanaGotras } from "@/data/gotras";
+import { anjanaChaudharyGotras } from "@/data/gotras";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function HeroSection() {
@@ -34,19 +34,19 @@ export default function HeroSection() {
     },
   };
 
-  // Divide the 34 Gotras across 6 vertical ambient columns
+  // Divide the 233 Anjana Chaudhary Samaj Gotras across 6 vertical ambient columns
   const colCount = 6;
-  const colSize = Math.ceil(aanjanaGotras.length / colCount);
+  const colSize = Math.ceil(anjanaChaudharyGotras.length / colCount);
   const columns = Array.from({ length: colCount }, (_, colIndex) => {
-    const slice = aanjanaGotras.slice(colIndex * colSize, (colIndex + 1) * colSize);
+    const slice = anjanaChaudharyGotras.slice(colIndex * colSize, (colIndex + 1) * colSize);
     // Pad to ensure all columns have equal length
     const padded =
       slice.length < colSize
-        ? [...slice, ...aanjanaGotras.slice(0, colSize - slice.length)]
+        ? [...slice, ...anjanaChaudharyGotras.slice(0, colSize - slice.length)]
         : slice;
-    // Repeat 3x to ensure vertical height exceeds ~1100px so loops are completely gap-free on all screens
-    const base = [...padded, ...padded, ...padded];
-    return [...base, ...base]; // 2 identical halves for seamless translateY(0%) to translateY(-50%)
+    // 2 identical halves for seamless translateY(0%) to translateY(-50%) infinite continuous loop
+    const base = padded;
+    return [...base, ...base];
   });
 
   // Independent movement speeds for each column (seconds)

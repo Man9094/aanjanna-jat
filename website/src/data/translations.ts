@@ -90,9 +90,9 @@ export const translations = {
     en: "3 Major States (Gujarat, Rajasthan, MP)",
   },
   statGotras: {
-    gu: "૩૪+ ઐતિહાસિક ગોત્ર",
-    hi: "३४+ ऐतिहासिक कुल गोत्र",
-    en: "34+ Historic Gotras",
+    gu: "૨૩૦+ ગોત્ર",
+    hi: "२३०+ कुल गोत्र",
+    en: "230+ Community Gotras",
   },
   statVillages: {
     gu: "૧,૦૦૦+ પ્રમાણિત ગામો",
