@@ -9,13 +9,13 @@ const actionColors: Record<string, string> = {
   MEMBER_UPDATED: "bg-blue-100 text-blue-700",
   ADMIN_LOGIN_SUCCESS: "bg-green-100 text-green-700",
   ADMIN_LOGIN_FAILURE: "bg-amber-100 text-amber-700",
-  ADMIN_CREATED: "bg-purple-100 text-purple-700",
-  ANNOUNCEMENT_CREATED: "bg-indigo-100 text-indigo-700",
+  ADMIN_CREATED: "bg-[#FAF2E0] text-[#B52A12]",
+  ANNOUNCEMENT_CREATED: "bg-[#FAF2E0] text-[#D9A52B]",
   ANNOUNCEMENT_UPDATED: "bg-sky-100 text-sky-700",
 };
 
 export default async function AuditLogsPage() {
-  // SUPER_ADMIN only — enforced server-side
+  // SUPER_ADMIN only: enforced server-side
   await requireAdmin("SUPER_ADMIN");
 
   const cookieStore = await cookies();

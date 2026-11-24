@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface PageHeroProps {
   title: string;
@@ -18,80 +18,96 @@ export default function PageHero({
   subtitle,
   breadcrumbs = [],
 }: PageHeroProps) {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-maroon via-saffron-dark to-maroon py-20 md:py-28">
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 cultural-pattern opacity-30" />
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-saffron/10 blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-gold/10 blur-3xl" />
+  const shouldReduceMotion = useReducedMotion();
+  const { t, language } = useLanguage();
 
-      <div className="relative max-w-7xl mx-auto px-6 text-center">
+  const breadcrumbSchema = breadcrumbs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://aanjanajatmahasabha.org",
+      },
+      ...breadcrumbs.map((b, idx) => ({
+        "@type": "ListItem",
+        position: idx + 2,
+        name: b.label,
+        item: `https://aanjanajatmahasabha.org${b.href}`,
+      })),
+    ],
+  } : null;
+
+  return (
+    <section className="relative overflow-hidden bg-[#B52A12] text-white py-16 md:py-24 border-b-2 border-[#D9A52B]">
+      {breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+      )}
+
+      <div className="relative max-w-7xl mx-auto px-6 text-center z-10">
         {/* Breadcrumbs */}
         {breadcrumbs.length > 0 && (
-          <motion.nav
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="flex items-center justify-center gap-2 text-sm text-white/60 mb-6"
+          <nav
+            className="flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80 mb-5"
             aria-label="Breadcrumb"
           >
-            <Link href="/" className="flex items-center gap-1 hover:text-white transition-colors">
-              <Home size={14} />
-              Home
+            <Link href="/" className="flex items-center gap-1 hover:text-[#D9A52B] transition-colors font-medium">
+              <Home size={13} />
+              {t("navHome")}
             </Link>
             {breadcrumbs.map((crumb, i) => (
               <span key={i} className="flex items-center gap-2">
-                <ChevronRight size={14} />
+                <ChevronRight size={13} className="text-[#D9A52B]" />
                 {i === breadcrumbs.length - 1 ? (
-                  <span className="text-white/90">{crumb.label}</span>
+                  <span className="text-white font-semibold">{crumb.label}</span>
                 ) : (
-                  <Link href={crumb.href} className="hover:text-white transition-colors">
+                  <Link href={crumb.href} className="hover:text-[#D9A52B] transition-colors">
                     {crumb.label}
                   </Link>
                 )}
               </span>
             ))}
-          </motion.nav>
+          </nav>
         )}
 
         {/* Title */}
-        {titleHi && (
+        {titleHi && language === "hi" && (
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-devanagari text-white/50 text-sm mb-2"
+            transition={{ type: "spring", stiffness: 220, damping: 28 }}
+            className="text-[#D9A52B] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 font-devanagari"
           >
             {titleHi}
           </motion.p>
         )}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
+          transition={{ type: "spring", stiffness: 220, damping: 28, delay: 0.05 }}
+          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-3 font-display tracking-tight"
         >
           {title}
         </motion.h1>
 
         {subtitle && (
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg text-white/70 max-w-2xl mx-auto"
+            transition={{ type: "spring", stiffness: 220, damping: 28, delay: 0.1 }}
+            className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto font-normal leading-relaxed"
           >
             {subtitle}
           </motion.p>
         )}
 
         {/* Decorative divider */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-6 mx-auto w-24 h-1 rounded-full bg-gradient-to-r from-gold via-white to-gold"
-        />
+        <div className="mt-5 mx-auto w-20 h-1 rounded-full bg-[#D9A52B]" />
       </div>
     </section>
   );

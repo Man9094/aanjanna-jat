@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Learn about Anjana Jat Mahasabha's history, vision, mission, objectives, and values. Discover our journey of community service and empowerment.",
+  title: "Heritage & Organization History | Anjana Jat Mahasabha",
+  description:
+    "Learn about Anjana Jat Mahasabha's authentic history, cultural heritage, organizational constitution, and milestones of community service across India.",
 };
 
 export default function AboutPage() {

@@ -6,7 +6,7 @@ import AdminHeader from "@/components/admin/AdminHeader";
 export const metadata: Metadata = {
   title: {
     default: "Admin Panel | Anjana Jat Mahasabha",
-    template: "%s | Admin — Anjana Jat Mahasabha",
+    template: "%s | Admin | Anjana Jat Mahasabha",
   },
   robots: { index: false, follow: false },
 };

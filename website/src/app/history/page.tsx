@@ -4,127 +4,150 @@ import { motion } from "framer-motion";
 import { Crown, Calendar } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeading from "@/components/shared/SectionHeading";
+import { useLanguage } from "@/context/LanguageContext";
 
 const timelineEvents = [
-  { year: "Ancient Era", title: "Origins of the Anjana Jat Community", description: "The Anjana Jat community traces its roots to the ancient Kshatriya warriors of Rajputana. Known for valor, farming, and community living, the Anjana Jats played a significant role in the social fabric of Western India." },
-  { year: "Medieval Period", title: "Establishment of Village Republics", description: "During the medieval era, Anjana Jat communities established self-governing village republics (panchayats) across Rajasthan and Gujarat, known for democratic governance and social justice." },
-  { year: "18th Century", title: "Agricultural Revolution", description: "The community played a pivotal role in transforming arid lands into fertile farmlands through innovative irrigation techniques and community-led farming cooperatives." },
-  { year: "1857", title: "Freedom Movement Participation", description: "Members of the Anjana Jat community actively participated in the Indian independence movement, contributing warriors and resources to the cause of freedom." },
-  { year: "1920s", title: "Social Reform Movement", description: "Community leaders initiated social reform movements promoting education, widow remarriage, and elimination of social evils during the early 20th century." },
-  { year: "1948", title: "Formation of Mahasabha", description: "The Anjana Jat Mahasabha was formally established after independence to unite the community and work towards collective welfare and development." },
-  { year: "1960s", title: "Education Expansion", description: "The community established its first schools and colleges, prioritizing education as the key to empowerment and progress." },
-  { year: "1980s", title: "National Expansion", description: "The Mahasabha expanded beyond Rajasthan and Gujarat to establish chapters across 12 Indian states with a unified organizational structure." },
-  { year: "2000s", title: "Digital Era", description: "Embracing technology for community management, the Mahasabha launched digital platforms for membership, communication, and service delivery." },
-  { year: "Present", title: "Modern Community Organization", description: "Today, with 50,000+ members and a comprehensive service portfolio, the Anjana Jat Mahasabha stands as a model community organization, blending tradition with modernity." },
-];
-
-const historicalLeaders = [
-  { name: "Shri Nathu Ram Ji Anjana", era: "1948-1960", role: "Founding President", contribution: "Established the organizational foundation and united scattered community groups under one banner." },
-  { name: "Shri Ganga Ram Ji Anjana", era: "1960-1975", role: "President", contribution: "Spearheaded the education movement and established the first community schools." },
-  { name: "Shri Suraj Mal Ji Anjana", era: "1975-1990", role: "President", contribution: "Expanded the organization nationally and launched the scholarship program." },
-  { name: "Shri Bhawani Singh Ji Anjana", era: "1990-2005", role: "President", contribution: "Modernized the organization and established the women and youth wings." },
+  {
+    year: "प्राचीन काल",
+    yearEn: "Ancient Era",
+    titleHi: "आँजणा क्षत्रिय कुल की उत्पत्ति",
+    titleGu: "આંજણા ક્ષત્રિય કુળની ઉત્પત્તિ",
+    titleEn: "Origins of the Anjana Kshatriya Community",
+    descriptionHi: "आँजणा समाज का इतिहास प्राचीन राजपूताना के सूर्यवंशी एवं चंद्रवंशी क्षत्रिय योद्धाओं से जुड़ा है। कृषि कर्म और शौर्य दोनों इस समाज के गौरवशाली आधार रहे हैं।",
+    descriptionGu: "આંજણા સમાજનો ઇતિહાસ પ્રાચીન ક્ષત્રિય યોદ્ધાઓ સાથે જોડાયેલો છે. ખેતી અને શૌર્ય બંને આ સમાજના ગૌરવશાળી આધારસ્તંભ રહ્યા છે.",
+    descriptionEn: "The Anjana community traces its lineage to the ancient warriors of Rajputana, combining agrarian dignity with historical valour."
+  },
+  {
+    year: "मध्यकाल",
+    yearEn: "Medieval Period",
+    titleHi: "खेत-खेड़ा खाप व्यवस्था की स्थापना",
+    titleGu: "ખેત-ખેડા ખાપ વ્યવસ્થાની સ્થાપના",
+    titleEn: "Establishment of Khet-Kheda Khap System",
+    descriptionHi: "मध्यकाल में राजस्थान एवं गुजरात के क्षेत्रों में स्वशासित ग्रामीण पंचायतों एवं खाप व्यवस्था का सुदृढ़ीकरण हुआ, जिसने सामाजिक मर्यादा और न्याय को सुरक्षित रखा।",
+    descriptionGu: "મધ્યકાળમાં રાજસ્થાન અને ગુજરાતના વિસ્તારોમાં સ્વશાસિત ગ્રામ પંચાયતો અને ખાપ વ્યવસ્થા મજબૂત બની, જેણે સામાજિક ન્યાય સુરક્ષિત રાખ્યો.",
+    descriptionEn: "Self-governing village councils and the Khet-Kheda Khap tradition fostered democratic governance and community unity."
+  },
+  {
+    year: "1857",
+    yearEn: "1857",
+    titleHi: "स्वाधीनता संग्राम में योगदान",
+    titleGu: "સ્વાતંત્ર્ય સંગ્રામમાં યોગદાન",
+    titleEn: "Contribution to Freedom Movement",
+    descriptionHi: "प्रथम स्वतंत्रता संग्राम और उसके बाद के राष्ट्रीय आंदोलनों में आँजणा समाज के वीरों ने मातृभूमि की रक्षा हेतु अग्रणी भूमिका निभाई।",
+    descriptionGu: "પ્રથમ સ્વાતંત્ર્ય સંગ્રામ અને રાષ્ટ્રીય આંદોલનોમાં આંજણા સમાજના વીરોએ માતૃભૂમિના રક્ષણ માટે સક્રિય ભૂમિકા ભજવી.",
+    descriptionEn: "Community ancestors actively participated in India's independence movement, demonstrating immense sacrifice and patriotism."
+  },
+  {
+    year: "1948",
+    yearEn: "1948",
+    titleHi: "आँजणा जाट महासभा का औपचारिक गठन",
+    titleGu: "આંજણા જાટ મહાસભાનું ઔપચારિક ગઠન",
+    titleEn: "Formal Foundation of the Mahasabha",
+    descriptionHi: "आजादी के पश्चात समाज के समस्त गोत्रों, क्षेत्रों और ग्रामों को एक संगठनात्मक छतरी के नीचे लाने हेतु महासभा की स्थापना की गई।",
+    descriptionGu: "આઝાદી પછી સમાજના તમામ ગોત્રો, વિસ્તારો અને ગામોને એક સંગઠન હેઠળ લાવવા માટે મહાસભાની સ્થાપના કરવામાં આવી.",
+    descriptionEn: "The Anjana Jat Mahasabha was formally established after independence to unite the community across states under a single banner."
+  },
+  {
+    year: "वर्तमान",
+    yearEn: "Present Day",
+    titleHi: "आधुनिक शिक्षा, डिजिटलीकरण एवं सर्वांगीण विकास",
+    titleGu: "આધુનિક શિક્ષણ, ડિજિટાઇઝેશન અને સર્વાંગી વિકાસ",
+    titleEn: "Modern Education & Digital Community Portal",
+    descriptionHi: "आज महासभा डिजिटल पहचान पत्र, प्रामाणिक गाँव निर्देशिका, मेधावी छात्रवृत्ति और युवाओं के प्रशासनिक मार्गदर्शन में अग्रणी है।",
+    descriptionGu: "આજે મહાસભા ડિજિટલ ઓળખપત્ર, પ્રમાણિત ગામ ડિરેક્ટરી, શિષ્યવૃત્તિ અને યુવાનોના માર્ગદર્શનમાં અગ્રેસર છે.",
+    descriptionEn: "Today the Mahasabha leads through digital membership badges, verified village registries, and student empowerment initiatives."
+  },
 ];
 
 export default function HistoryPage() {
+  const { language } = useLanguage();
+
   return (
     <>
       <PageHero
-        title="Our History"
-        titleHi="हमारा इतिहास"
-        subtitle="A journey through centuries of valor, heritage, and community building."
-        breadcrumbs={[{ label: "About", href: "/about" }, { label: "Our History", href: "/history" }]}
+        title={language === "hi" ? "हमारा गौरवशाली इतिहास" : language === "gu" ? "આપણો ગૌરવશાળી ઇતિહાસ" : "Our Glorious History"}
+        titleHi="आँजणा जाट समाज ऐतिहासिक विरासत"
+        subtitle={
+          language === "hi"
+            ? "शौर्य, कृषि स्वाभिमान, खेत-खेड़ा खाप मर्यादा एवं सामाजिक समरसता की सदियों पुरानी गौरवगाथा।"
+            : language === "gu"
+            ? "શૌર્ય, કૃષિ સ્વાભિમાન અને સામાજિક સમરસતાની સદીઓ જૂની ગૌરવગાથા."
+            : "A journey through centuries of valor, agrarian dignity, and community heritage."
+        }
+        breadcrumbs={[
+          { label: language === "hi" ? "परिचय" : language === "gu" ? "પરિચય" : "About", href: "/about" },
+          { label: language === "hi" ? "इतिहास" : language === "gu" ? "ઇતિહાસ" : "History", href: "/history" }
+        ]}
       />
 
       {/* History Intro */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-[#FFF9EC]">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold gradient-text-maroon mb-6">
-              A Legacy of Valor & Unity
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#B52A12] mb-4 font-display">
+              {language === "hi"
+                ? "त्याग, शौर्य और स्वाभिमान का अमर इतिहास"
+                : language === "gu"
+                ? "ત્યાગ, શૌર્ય અને સ્વાભિમાનનો અમર ઇતિહાસ"
+                : "A Heritage of Courage, Cultivation & Solidarity"}
             </h2>
-            <div className="section-divider mb-6" />
-            <p className="text-muted-foreground leading-relaxed text-lg">
-              The Anjana Jat community has a rich and storied history spanning centuries.
-              From ancient Kshatriya warriors to modern-day professionals, our community
-              has always been at the forefront of social progress, agricultural innovation,
-              and cultural preservation.
+            <div className="w-20 h-0.5 bg-[#D9A52B] mx-auto mb-6" />
+            <p className="text-sm sm:text-base text-[#5C4E46] leading-relaxed">
+              {language === "hi"
+                ? "आँजणा जाट समाज का इतिहास सदियों पुराना और गौरव से परिपूर्ण है। प्राचीन क्षत्रिय परंपराओं से लेकर आधुनिक प्रगतिशील समाज तक, हमारे पूर्वजों ने हमेशा मातृभूमि की रक्षा, कृषि स्वाभिमान और सामाजिक न्याय को सर्वोपरि रखा है।"
+                : language === "gu"
+                ? "આંજણા જાટ સમાજનો ઇતિહાસ સદીઓ જૂનો અને ગૌરવપૂર્ણ છે. પ્રાચીન ક્ષત્રિય પરંપરાઓથી લઈને આધુનિક પ્રગતિશીલ સમાજ સુધી, આપણા પૂર્વજોએ હંમેશા માતૃભૂમિની રક્ષા, કૃષિ સ્વાભિમાન અને સામાજિક ન્યાયને સર્વોપરી રાખ્યો છે."
+                : "The Anjana Jat community has a rich and storied history spanning centuries. From ancient warriors to modern agrarian innovators, our community has consistently stood at the forefront of social progress and cultural preservation."}
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Timeline */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-16 md:py-24 bg-[#FAF2E0]">
         <div className="max-w-4xl mx-auto px-6">
           <SectionHeading
-            title="Historical Timeline"
-            titleHi="ऐतिहासिक समयरेखा"
+            title={language === "hi" ? "ऐतिहासिक यात्रा के प्रमुख पड़ाव" : language === "gu" ? "ઐતિહાસિક યાત્રાના મુખ્ય તબક્કા" : "Historical Milestones"}
+            titleHi="कालक्रम एवं ऐतिहासिक संदर्भ"
           />
 
-          <div className="relative">
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-saffron via-maroon to-gold" />
+          <div className="relative mt-12">
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#D9A52B]/50" />
 
             <div className="space-y-10">
-              {timelineEvents.map((event, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.5, delay: index * 0.06 }}
-                  className={`relative flex items-start gap-6 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-                >
-                  <div className="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-saffron to-maroon border-3 border-background transform -translate-x-2 mt-1 z-10 shadow-md" />
-                  <div className={`ml-14 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? "md:pr-8 md:text-right" : "md:pl-8"}`}>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-saffron/10 text-saffron text-sm font-bold mb-2">
-                      <Calendar size={13} />
-                      {event.year}
-                    </span>
-                    <h3 className="text-lg font-semibold text-foreground">{event.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{event.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+              {timelineEvents.map((event, index) => {
+                const yearLabel = language === "en" ? event.yearEn : event.year;
+                const titleLabel = language === "hi" ? event.titleHi : language === "gu" ? event.titleGu : event.titleEn;
+                const descLabel = language === "hi" ? event.descriptionHi : language === "gu" ? event.descriptionGu : event.descriptionEn;
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ duration: 0.45, delay: index * 0.06 }}
+                    className={`relative flex items-start gap-6 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+                  >
+                    <div className="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-[#B52A12] border-2 border-[#D9A52B] transform -translate-x-2 mt-1 z-10 shadow-xs" />
+                    <div className={`ml-14 md:ml-0 md:w-[calc(50%-2rem)] bg-white p-5 rounded-2xl border border-[#D9A52B]/35 shadow-xs ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF2E0] text-[#B52A12] text-xs font-bold mb-2">
+                        <Calendar size={13} className="text-[#D9A52B]" />
+                        {yearLabel}
+                      </span>
+                      <h3 className="text-base font-bold text-[#29211D] font-display">{titleLabel}</h3>
+                      <p className="text-xs text-[#5C4E46] mt-1.5 leading-relaxed">{descLabel}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Historical Leaders */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeading
-            title="Historical Leaders"
-            titleHi="ऐतिहासिक नेता"
-            subtitle="The visionary leaders who shaped our community."
-          />
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {historicalLeaders.map((leader, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover-lift"
-              >
-                <div className="w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-saffron/20 to-maroon/20 flex items-center justify-center">
-                  <Crown size={24} className="text-gold" />
-                </div>
-                <div>
-                  <h3 className="text-base font-semibold text-foreground">{leader.name}</h3>
-                  <p className="text-sm text-saffron font-medium">{leader.role} • {leader.era}</p>
-                  <p className="text-sm text-muted-foreground mt-2">{leader.contribution}</p>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>

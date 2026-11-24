@@ -24,7 +24,7 @@ interface SettingsClientProps {
 }
 
 const roleBadge: Record<string, string> = {
-  SUPER_ADMIN: "bg-purple-100 text-purple-800",
+  SUPER_ADMIN: "bg-[#FAF2E0] text-[#B52A12]",
   ADMIN: "bg-[#8B1E1E]/10 text-[#8B1E1E]",
   EDITOR: "bg-blue-100 text-blue-800",
   VIEWER: "bg-gray-100 text-gray-700",
@@ -304,7 +304,7 @@ export default function SettingsClient({
             <div className="rounded-xl border border-[#E5DDD3] bg-white p-5 shadow-sm">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <UserCheck size={18} className="text-purple-700" />
+                  <UserCheck size={18} className="text-[#B52A12]" />
                   <h3 className="text-sm font-bold text-[#1a1a1a]">Admin Accounts</h3>
                 </div>
                 <button

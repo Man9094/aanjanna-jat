@@ -51,12 +51,12 @@ const auditActionLabels: Record<string, { label: string; color: string }> = {
   MEMBER_APPROVED: { label: "Approved Member", color: "bg-emerald-100 text-emerald-800" },
   MEMBER_REJECTED: { label: "Rejected Member", color: "bg-red-100 text-red-800" },
   MEMBER_UPDATED: { label: "Updated Member", color: "bg-blue-100 text-blue-800" },
-  GOTRA_CREATED: { label: "Added Gotra", color: "bg-purple-100 text-purple-800" },
+  GOTRA_CREATED: { label: "Added Gotra", color: "bg-[#FAF2E0] text-[#B52A12]" },
   GOTRA_APPROVED: { label: "Approved Gotra", color: "bg-emerald-100 text-emerald-800" },
   GOTRA_REJECTED: { label: "Rejected Gotra", color: "bg-red-100 text-red-800" },
   DIRECTORY_CREATED: { label: "Added Directory Village", color: "bg-amber-100 text-amber-800" },
   DIRECTORY_UPDATED: { label: "Updated Directory", color: "bg-blue-100 text-blue-800" },
-  EVENT_CREATED: { label: "Created Event", color: "bg-indigo-100 text-indigo-800" },
+  EVENT_CREATED: { label: "Created Event", color: "bg-[#FAF2E0] text-[#D9A52B]" },
   EVENT_UPDATED: { label: "Updated Event", color: "bg-sky-100 text-sky-800" },
   ANNOUNCEMENT_CREATED: { label: "Created Announcement", color: "bg-teal-100 text-teal-800" },
   ADMIN_LOGIN_SUCCESS: { label: "Admin Login", color: "bg-gray-100 text-gray-700" },
@@ -196,8 +196,8 @@ export default async function AdminDashboard() {
           labelHi="सामुदायिक कार्यक्रम"
           value={totalEvents}
           icon={Calendar}
-          colorClass="bg-indigo-700"
-          iconColorClass="text-indigo-100"
+          colorClass="bg-[#B52A12]"
+          iconColorClass="text-[#D9A52B]"
           subtext="Scheduled events"
         />
       </div>

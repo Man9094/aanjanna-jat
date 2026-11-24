@@ -18,7 +18,6 @@ import {
   Check,
   Shield,
   ExternalLink,
-  Sparkles,
   Clock
 } from "lucide-react";
 import { PaymentService } from "@/services/payment.service";
@@ -243,22 +242,22 @@ export default function PaymentModal({ isOpen, onClose, categoryTitle, amount }:
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#29211D]/80">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="relative w-full max-w-md overflow-hidden rounded-2xl bg-card border border-border shadow-2xl flex flex-col max-h-[90vh]"
+          className="relative w-full max-w-md overflow-hidden rounded-2xl bg-white border border-[#D9A52B]/40 shadow-2xl flex flex-col max-h-[90vh]"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-saffron/10 via-maroon/5 to-transparent shrink-0">
+          <div className="flex items-center justify-between p-4 border-b border-[#D9A52B]/30 bg-[#FAF2E0] shrink-0">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-saffron/20 flex items-center justify-center text-saffron font-bold">
+              <div className="w-9 h-9 rounded-xl bg-[#FAF2E0] border border-[#D9A52B]/50 flex items-center justify-center text-[#B52A12] font-bold">
                 <QrCode size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-foreground text-sm flex items-center gap-1.5">
-                  UPI Scan & Pay <Sparkles size={14} className="text-saffron" />
+                <h3 className="font-bold text-[#29211D] text-sm flex items-center gap-1.5">
+                  UPI Scan & Pay
                 </h3>
                 <p className="text-[11px] text-muted-foreground flex items-center gap-1">
                   <Lock size={10} className="text-emerald-500" /> PhonePe, GPay, Paytm & BHIM
@@ -488,7 +487,7 @@ export default function PaymentModal({ isOpen, onClose, categoryTitle, amount }:
                         onClick={() => handleOpenApp("phonepe")}
                         className="p-3.5 rounded-xl bg-muted/60 border border-border hover:border-saffron/50 flex items-center gap-3 transition-all hover:scale-[1.02] text-left cursor-pointer"
                       >
-                        <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold text-xs">
+                        <div className="w-8 h-8 rounded-lg bg-[#FAF2E0] border border-[#D9A52B]/40 text-[#B52A12] flex items-center justify-center font-bold text-xs">
                           P
                         </div>
                         <div className="text-left">

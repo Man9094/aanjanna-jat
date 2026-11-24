@@ -38,6 +38,6 @@ export const aanjanaGotras: GotraItem[] = [
   { id: "juva", hi: "जुवा", gu: "જુવા", en: "Juva" },
   { id: "odna", hi: "ओडना", gu: "ઓડના", en: "Odna" },
   { id: "siyar", hi: "सियार", gu: "સિયાર", en: "Siyar" },
-  { id: "dudavat", hi: "दुदावत", gu: "દુદાવાત", en: "Dudavat" },
-  { id: "limbat", hi: "लिम्बट", gu: "લીમ્બટ", en: "Limbat" }
+  { id: "dudavat", hi: "दुदावत", gu: "દુદાવત", en: "Dudavat" },
+  { id: "limbat", hi: "लिम्बट", gu: "લિમ્બટ", en: "Limbat" }
 ];

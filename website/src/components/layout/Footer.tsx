@@ -6,64 +6,47 @@ import {
   Mail,
   Phone,
   MapPin,
-  Heart,
   ArrowUp,
   Send,
+  CreditCard,
+  ShieldCheck,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
-// Social media icons as SVG components since lucide-react doesn't include brand icons
 const Facebook = ({ size = 16 }: { size?: number }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
 );
 const TwitterX = ({ size = 16 }: { size?: number }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
 );
 const Instagram = ({ size = 16 }: { size?: number }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+  </svg>
 );
 const Youtube = ({ size = 16 }: { size?: number }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
 );
-const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-);
-
-const quickLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Our History", href: "/history" },
-  { label: "Leadership", href: "/leadership" },
-  { label: "Community Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-];
-
-const communityLinks = [
-  { label: "Events", href: "/events" },
-  { label: "News & Updates", href: "/news" },
-  { label: "Membership", href: "/membership" },
-  { label: "Donation", href: "/donation" },
-  { label: "Scholarship Portal", href: "/scholarship" },
-  { label: "Blood Donation", href: "/blood-donation" },
-];
-
-const moreLinks = [
-  { label: "Matrimonial", href: "/matrimonial" },
-  { label: "Business Directory", href: "/business-directory" },
-  { label: "Career Portal", href: "/careers" },
-  { label: "Contact Us", href: "/contact" },
-];
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook", color: "hover:text-blue-500" },
-  { icon: TwitterX, href: "#", label: "Twitter", color: "hover:text-sky-500" },
-  { icon: Instagram, href: "#", label: "Instagram", color: "hover:text-pink-500" },
-  { icon: Youtube, href: "#", label: "YouTube", color: "hover:text-red-500" },
-  { icon: LinkedinIcon, href: "#", label: "LinkedIn", color: "hover:text-blue-600" },
+  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+  { icon: TwitterX, href: "https://twitter.com", label: "Twitter" },
+  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
 ];
 
 export default function Footer() {
+  const { language, t } = useLanguage();
   const [email, setEmail] = useState("");
   const [showBackTop, setShowBackTop] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,126 +62,179 @@ export default function Footer() {
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement newsletter subscription
-    alert("Thank you for subscribing! We will keep you updated.");
+    if (!email.trim()) return;
+    setSubscribed(true);
     setEmail("");
+    setTimeout(() => setSubscribed(false), 4000);
   };
+
+  const quickLinks = [
+    { label: t("navAboutUs"), href: "/about" },
+    { label: t("navHistory"), href: "/history" },
+    { label: t("navLeadership"), href: "/leadership" },
+    { label: t("navServices"), href: "/services" },
+    { label: t("navGallery"), href: "/gallery" },
+  ];
+
+  const communityLinks = [
+    { label: t("navEvents"), href: "/events" },
+    { label: t("navNews"), href: "/news" },
+    { label: t("navMembership"), href: "/membership" },
+    { label: t("navDonation"), href: "/donation" },
+    { label: t("navScholarship"), href: "/scholarship" },
+    { label: t("navBloodDonation"), href: "/blood-donation" },
+  ];
+
+  const moreLinks = [
+    { label: t("navMatrimonial"), href: "/matrimonial" },
+    { label: t("navBusinessDirectory"), href: "/business-directory" },
+    { label: t("navCareers"), href: "/careers" },
+    { label: t("navVillages"), href: "/villages" },
+    { label: t("navContact"), href: "/contact" },
+  ];
 
   return (
     <>
-      {/* Newsletter Section */}
-      <section className="bg-gradient-to-r from-maroon via-saffron-dark to-maroon py-14">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="text-center lg:text-left">
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Stay Connected with the Community
-              </h3>
-              <p className="text-white/80 text-sm">
-                Subscribe to our newsletter for latest news, events, and updates.
-              </p>
-            </div>
-            <form
-              onSubmit={handleNewsletterSubmit}
-              className="flex w-full max-w-md"
-            >
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                required
-                className="flex-1 px-5 py-3 rounded-l-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-gold text-sm"
-                aria-label="Email address for newsletter"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 rounded-r-full bg-gold text-white font-medium hover:bg-gold-light transition-colors flex items-center gap-2 text-sm"
-              >
-                <Send size={15} />
-                Subscribe
-              </button>
-            </form>
+      {/* Editorial Motto & Newsletter Section (Kesari Red) */}
+      <section className="bg-[#B52A12] text-white py-12 px-6 border-t-2 border-[#D9A52B]">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="text-center lg:text-left">
+            <p className="text-[#D9A52B] font-bold text-xs uppercase tracking-wider mb-1">
+              {t("brandTitle")}
+            </p>
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 font-devanagari">
+              {t("officialMotto")}
+            </h3>
+            <p className="text-white/85 text-xs sm:text-sm max-w-xl">
+              {language === "hi"
+                ? "समाज की नवीनतम गतिविधियों, अधिवेशनों, निर्णयों एवं जनकल्याणकारी योजनाओं की सीधी जानकारी प्राप्त करें।"
+                : language === "gu"
+                ? "સમાજની નવીનતમ ગતિવિધિઓ, અધિવેશન, નિર્ણયો અને જનકલ્યાણકારી યોજનાઓની માહિતી મેળવો."
+                : "Receive direct updates on community conventions, administrative decisions, and welfare initiatives."}
+            </p>
           </div>
+
+          <form
+            onSubmit={handleNewsletterSubmit}
+            className="flex w-full max-w-md items-center shadow-md rounded-full bg-white/10 p-1 border border-[#D9A52B]/40"
+          >
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={
+                language === "hi"
+                  ? "ईमेल पता दर्ज करें..."
+                  : language === "gu"
+                  ? "ઇમેઇલ એડ્રેસ દાખલ કરો..."
+                  : "Enter your email address..."
+              }
+              required
+              className="flex-1 px-4 py-2.5 bg-transparent text-white placeholder:text-white/60 focus:outline-none text-xs sm:text-sm"
+              aria-label="Email address for updates"
+            />
+            <button
+              type="submit"
+              className="px-5 py-2.5 rounded-full bg-[#D9A52B] text-[#29211D] font-bold hover:bg-[#E5B84B] transition-colors flex items-center gap-1.5 text-xs sm:text-sm shrink-0"
+            >
+              <Send size={14} />
+              {subscribed
+                ? language === "hi"
+                  ? "धन्यवाद!"
+                  : language === "gu"
+                  ? "આભાર!"
+                  : "Thank you!"
+                : language === "hi"
+                ? "जुड़ें"
+                : language === "gu"
+                ? "જોડાવો"
+                : "Join"}
+            </button>
+          </form>
         </div>
       </section>
 
-      {/* Main Footer */}
-      <footer className="bg-card border-t border-border" role="contentinfo">
+      {/* Main Dignified Broadsheet Footer */}
+      <footer className="bg-[#FAF2E0] text-[#29211D] border-t border-[#D9A52B]/30" role="contentinfo">
         <div className="max-w-7xl mx-auto px-6 py-14">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-            {/* Brand Column */}
-            <div className="lg:col-span-2">
-              <Link href="/" className="flex items-center gap-3 mb-5 group">
-                <Image
-                  src="/logo.png"
-                  alt="Anjana Jat Mahasabha Logo"
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 rounded-full object-cover shadow-md group-hover:scale-105 transition-transform duration-300 border border-saffron/20"
-                />
+            {/* Column 1: Brand Authority */}
+            <div className="lg:col-span-2 space-y-4">
+              <Link href="/" className="flex items-center gap-3.5 group">
+                <div className="w-12 h-12 rounded-full p-0.5 bg-white border-2 border-[#D9A52B] shadow-xs shrink-0">
+                  <Image
+                    src="/logo.png"
+                    alt={t("brandTitle")}
+                    width={48}
+                    height={48}
+                    className="w-full h-full rounded-full object-contain"
+                  />
+                </div>
                 <div>
-                  <h2 className="text-lg font-bold text-foreground">
-                    Anjana Jat Mahasabha
+                  <h2 className="text-lg font-bold font-devanagari text-[#B52A12] leading-tight">
+                    {t("brandTitle")}
                   </h2>
-                  <p className="text-xs text-muted-foreground font-devanagari">
-                    आंजना जाट महासभा
+                  <p className="text-[11px] font-semibold text-[#29211D] tracking-wider uppercase font-sans">
+                    ANJANA JAT MAHASABHA
+                  </p>
+                  <p className="text-[10px] text-[#5C4E46]">
+                    {t("tagline")}
                   </p>
                 </div>
               </Link>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm">
-                Preserving our rich heritage while empowering the community through education,
-                social service, and unity. Together we build a brighter future for generations to come.
+
+              <p className="text-xs sm:text-sm text-[#5C4E46] leading-relaxed max-w-sm">
+                {language === "hi"
+                  ? "आँजणा समाज के गौरवशाली इतिहास, सांस्कृतिक धरोहर, कृषि स्वाभिमान एवं युवाओं के सर्वांगीण विकास हेतु समर्पित आधिकारिक अखिल भारतीय संगठन।"
+                  : language === "gu"
+                  ? "આંજણા સમાજના ગૌરવશાળી ઇતિહાસ, સાંસ્કૃતિક વારસો, કૃષિ સ્વાભિમાન અને યુવાનોના વિકાસ માટે સમર્પિત સર્વોચ્ચ સંગઠન."
+                  : "The official apex all-India organization dedicated to authentic heritage preservation, agrarian dignity, and holistic youth empowerment."}
               </p>
 
-              {/* Contact Info */}
-              <div className="space-y-3">
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-sm text-muted-foreground hover:text-saffron transition-colors"
-                >
-                  <MapPin size={16} className="mt-0.5 shrink-0 text-saffron" />
-                  <span>Anjana Bhawan, Gandhi Nagar,<br />Jaipur, Rajasthan - 302015</span>
-                </a>
-                <a
-                  href="mailto:info@aanjanajatmahasabha.org"
-                  className="flex items-center gap-3 text-sm text-muted-foreground hover:text-saffron transition-colors"
-                >
-                  <Mail size={16} className="shrink-0 text-saffron" />
-                  <span>info@aanjanajatmahasabha.org</span>
-                </a>
+              {/* Office & Contact Info */}
+              <div className="space-y-2 pt-2 text-xs text-[#5C4E46]">
+                <div className="flex items-start gap-2.5">
+                  <MapPin size={15} className="text-[#B52A12] shrink-0 mt-0.5" />
+                  <span>{t("officeAddress")}</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Mail size={15} className="text-[#B52A12] shrink-0" />
+                  <span>{t("officialEmail")}</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Phone size={15} className="text-[#B52A12] shrink-0" />
+                  <span>{t("helplineText")}</span>
+                </div>
               </div>
 
-              {/* Social Icons */}
-              <div className="flex items-center gap-3 mt-6">
+              {/* Social Channels */}
+              <div className="flex items-center gap-2.5 pt-2">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-9 h-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground ${social.color} transition-colors`}
+                    className="w-8 h-8 rounded-full bg-white border border-[#29211D]/15 flex items-center justify-center text-[#5C4E46] hover:text-[#B52A12] hover:border-[#B52A12] transition-colors"
                     aria-label={social.label}
                   >
-                    <social.icon size={16} />
+                    <social.icon size={14} />
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* Quick Links */}
+            {/* Column 2: Quick Links */}
             <div>
-              <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">
-                Quick Links
+              <h3 className="text-xs font-bold text-[#B52A12] uppercase tracking-wider mb-3.5 pb-1 border-b border-[#D9A52B]/40 inline-block font-sans">
+                {language === "hi" ? "महत्वपूर्ण पृष्ठ" : language === "gu" ? "મહત્વપૂર્ણ પૃષ્ઠો" : "Quick Links"}
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 {quickLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-saffron transition-colors"
+                      className="text-xs text-[#5C4E46] hover:text-[#B52A12] transition-colors block py-0.5"
                     >
                       {link.label}
                     </Link>
@@ -207,17 +243,17 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Community */}
+            {/* Column 3: Community & Services */}
             <div>
-              <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">
-                Community
+              <h3 className="text-xs font-bold text-[#B52A12] uppercase tracking-wider mb-3.5 pb-1 border-b border-[#D9A52B]/40 inline-block font-sans">
+                {language === "hi" ? "समाज मंच एवं सेवाएं" : language === "gu" ? "સમાજ મંચ અને સેવાઓ" : "Community & Services"}
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 {communityLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-saffron transition-colors"
+                      className="text-xs text-[#5C4E46] hover:text-[#B52A12] transition-colors block py-0.5"
                     >
                       {link.label}
                     </Link>
@@ -226,42 +262,67 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* More */}
+            {/* Column 4: More Resources & Verification */}
             <div>
-              <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">
-                More
+              <h3 className="text-xs font-bold text-[#B52A12] uppercase tracking-wider mb-3.5 pb-1 border-b border-[#D9A52B]/40 inline-block font-sans">
+                {language === "hi" ? "सहयोग एवं संपर्क" : language === "gu" ? "સહયોગ અને સંપર્ક" : "Connect & Support"}
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 {moreLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-saffron transition-colors"
+                      className="text-xs text-[#5C4E46] hover:text-[#B52A12] transition-colors block py-0.5"
                     >
                       {link.label}
                     </Link>
                   </li>
                 ))}
               </ul>
+
+              <div className="mt-4 p-3 rounded-lg bg-white border border-[#D9A52B]/40">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#B52A12]">
+                  <ShieldCheck size={14} className="text-[#D9A52B]" />
+                  {language === "hi"
+                    ? "सत्यापित आधिकारिक पोर्टल"
+                    : language === "gu"
+                    ? "પ્રમાણિત સત્તાવાર પોર્ટલ"
+                    : "Verified Official Portal"}
+                </div>
+                <p className="text-[10px] text-[#5C4E46] mt-1 leading-snug">
+                  {language === "hi"
+                    ? "महासभा के सभी निर्णय, सदस्यता एवं दान पूर्णतः प्रामाणिक व सुरक्षित हैं।"
+                    : language === "gu"
+                    ? "મહાસભાના તમામ નિર્ણયો, સભ્યપદ અને દાન સંપૂર્ણપણે પ્રામાણિક અને સુરક્ષિત છે."
+                    : "All Mahasabha decisions, memberships, and donations are authenticated and secure."}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-border">
-          <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-muted-foreground text-center sm:text-left">
-              © {new Date().getFullYear()} Anjana Jat Mahasabha. All rights reserved.
+        {/* Bottom Dignified Broadsheet Strip */}
+        <div className="border-t border-[#29211D]/10 bg-[#FFF9EC]">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#5C4E46]">
+            <p className="text-center sm:text-left">
+              © {new Date().getFullYear()} {t("brandTitle")} •{" "}
+              {language === "hi"
+                ? "सर्वाधिकार सुरक्षित"
+                : language === "gu"
+                ? "સર્વાધિકાર સુરક્ષિત"
+                : "All Rights Reserved"}
             </p>
-            <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <Link href="#" className="hover:text-saffron transition-colors">
-                Privacy Policy
+            <div className="flex items-center gap-4 text-[11px]">
+              <Link href="/about" className="hover:text-[#B52A12] transition-colors">
+                {language === "hi" ? "विधान एवं नियमावली" : language === "gu" ? "બંધારણ અને નિયમો" : "Constitution & Bylaws"}
               </Link>
-              <Link href="#" className="hover:text-saffron transition-colors">
-                Terms & Conditions
+              <span>•</span>
+              <Link href="/contact" className="hover:text-[#B52A12] transition-colors">
+                {t("navContact")}
               </Link>
-              <span className="flex items-center gap-1">
-                Made with <Heart size={12} className="text-red-500 fill-red-500" /> in India
+              <span>•</span>
+              <span className="flex items-center gap-1 text-[#5C4E46]">
+                {t("tagline")}
               </span>
             </div>
           </div>
@@ -272,33 +333,20 @@ export default function Footer() {
       {showBackTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-gradient-to-br from-saffron to-maroon text-white flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
-          aria-label="Back to top"
+          className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-[#B52A12] text-white flex items-center justify-center shadow-lg hover:bg-[#8F1F0B] hover:scale-105 transition-all border border-[#D9A52B]"
+          aria-label="Back to Top"
         >
-          <ArrowUp size={18} />
+          <ArrowUp size={16} />
         </button>
       )}
 
-      {/* Floating WhatsApp Button */}
-      <a
-        href="https://wa.me/?text=Hello%20Anjana%20Jat%20Mahasabha"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
-        aria-label="Chat on WhatsApp"
-      >
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-      </a>
-
-      {/* Floating Donate Button */}
+      {/* Floating Quick Action: Membership ID Badge */}
       <Link
-        href="/donation"
-        className="fixed bottom-20 right-6 z-40 px-4 py-2.5 rounded-full bg-gradient-to-r from-gold to-gold-light text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 animate-pulse-glow"
+        href="/membership"
+        className="fixed bottom-6 left-6 z-40 px-3.5 py-2 rounded-full bg-[#B52A12] text-white text-xs font-bold flex items-center gap-1.5 shadow-lg hover:bg-[#8F1F0B] hover:scale-105 transition-all border border-[#D9A52B]"
       >
-        <Heart size={14} className="fill-white" />
-        Donate
+        <CreditCard size={14} className="text-[#D9A52B]" />
+        {t("navMembership")}
       </Link>
     </>
   );

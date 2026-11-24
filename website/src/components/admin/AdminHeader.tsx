@@ -18,7 +18,7 @@ export default function AdminHeader({
   adminRole: AdminRole;
 }) {
   return (
-    <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-[#E5DDD3] bg-white/95 px-4 backdrop-blur-md md:px-6 lg:px-8">
+    <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-[#E5DDD3] bg-white px-4 md:px-6 lg:px-8">
       {/* Left spacer for mobile menu button */}
       <div className="w-12 lg:w-0" />
 

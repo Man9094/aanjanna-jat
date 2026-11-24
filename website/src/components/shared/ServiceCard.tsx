@@ -50,44 +50,46 @@ export default function ServiceCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
     >
       <Link
         href={`/services#${slug}`}
         className={cn(
-          "group block rounded-2xl bg-card border border-border p-6 hover-lift",
-          compact ? "p-5" : "p-6"
+          "group block rounded-2xl bg-white border border-[#D9A52B]/40 hover:border-[#B52A12] shadow-xs hover:shadow-md transition-all p-5 h-full flex flex-col justify-between",
+          compact ? "p-4 sm:p-5" : "p-6"
         )}
       >
-        <div
-          className={cn(
-            "rounded-xl bg-gradient-to-br from-saffron/10 to-maroon/10 flex items-center justify-center mb-4 group-hover:from-saffron/20 group-hover:to-maroon/20 transition-colors",
-            compact ? "w-12 h-12" : "w-14 h-14"
-          )}
-        >
-          <IconComponent
+        <div>
+          <div
             className={cn(
-              "text-saffron group-hover:scale-110 transition-transform",
-              compact ? "w-5 h-5" : "w-6 h-6"
+              "rounded-xl bg-[#FAF2E0] border border-[#D9A52B]/40 flex items-center justify-center mb-3 group-hover:bg-[#B52A12] transition-colors",
+              compact ? "w-11 h-11" : "w-13 h-13"
             )}
-          />
-        </div>
-        <h3
-          className={cn(
-            "font-semibold text-foreground group-hover:text-saffron transition-colors mb-2",
-            compact ? "text-sm" : "text-base"
+          >
+            <IconComponent
+              className={cn(
+                "text-[#B52A12] group-hover:text-white transition-colors",
+                compact ? "w-5 h-5" : "w-6 h-6"
+              )}
+            />
+          </div>
+          <h3
+            className={cn(
+              "font-bold text-[#29211D] group-hover:text-[#B52A12] transition-colors mb-1.5 leading-snug",
+              compact ? "text-xs sm:text-sm" : "text-base"
+            )}
+          >
+            {title}
+          </h3>
+          {!compact && (
+            <p className="text-xs text-[#5C4E46] line-clamp-2 leading-relaxed">
+              {description}
+            </p>
           )}
-        >
-          {title}
-        </h3>
-        {!compact && (
-          <p className="text-sm text-muted-foreground line-clamp-2">
-            {description}
-          </p>
-        )}
+        </div>
       </Link>
     </motion.div>
   );

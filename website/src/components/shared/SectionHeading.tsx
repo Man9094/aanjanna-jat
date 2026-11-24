@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface SectionHeadingProps {
   title: string;
@@ -20,23 +21,22 @@ export default function SectionHeading({
   light = false,
   className,
 }: SectionHeadingProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const { language } = useLanguage();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5 }}
-      className={cn(
-        "mb-12",
-        centered && "text-center",
-        className
-      )}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ type: "spring", stiffness: 220, damping: 28 }}
+      className={cn("mb-12", centered && "text-center", className)}
     >
-      {titleHi && (
+      {titleHi && language === "hi" && (
         <p
           className={cn(
-            "text-sm font-devanagari mb-2",
-            light ? "text-white/60" : "text-saffron/70"
+            "text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 font-devanagari",
+            light ? "text-[#D9A52B]" : "text-[#B52A12]"
           )}
         >
           {titleHi}
@@ -44,8 +44,8 @@ export default function SectionHeading({
       )}
       <h2
         className={cn(
-          "text-3xl md:text-4xl font-bold mb-4",
-          light ? "text-white" : "gradient-text-maroon"
+          "text-3xl md:text-4xl font-extrabold tracking-tight mb-3 font-display",
+          light ? "text-white" : "text-[#B52A12]"
         )}
       >
         {title}
@@ -54,9 +54,9 @@ export default function SectionHeading({
       {subtitle && (
         <p
           className={cn(
-            "mt-4 text-base max-w-2xl",
+            "mt-3 text-sm sm:text-base max-w-2xl font-normal leading-relaxed",
             centered && "mx-auto",
-            light ? "text-white/70" : "text-muted-foreground"
+            light ? "text-white/80" : "text-[#5C4E46]"
           )}
         >
           {subtitle}

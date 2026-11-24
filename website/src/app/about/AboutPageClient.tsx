@@ -4,53 +4,133 @@ import { motion } from "framer-motion";
 import { Eye, Target, Heart, Star, Shield, Users, BookOpen, Handshake } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeading from "@/components/shared/SectionHeading";
+import { useLanguage } from "@/context/LanguageContext";
 
 const values = [
-  { icon: Heart, title: "Unity", titleHi: "एकता", description: "Strengthening bonds among community members across all regions." },
-  { icon: BookOpen, title: "Education", titleHi: "शिक्षा", description: "Promoting learning and knowledge as the foundation of progress." },
-  { icon: Handshake, title: "Service", titleHi: "सेवा", description: "Selfless service to the community and society at large." },
-  { icon: Shield, title: "Heritage", titleHi: "विरासत", description: "Preserving our rich cultural traditions and historical legacy." },
-  { icon: Star, title: "Excellence", titleHi: "उत्कृष्टता", description: "Pursuing excellence in every community initiative we undertake." },
-  { icon: Users, title: "Empowerment", titleHi: "सशक्तिकरण", description: "Empowering every member with opportunities for growth." },
-];
-
-const objectives = [
-  "Unite all Anjana Jat community members under one umbrella organization",
-  "Promote education and provide scholarships to deserving students",
-  "Organize medical camps and healthcare initiatives in rural areas",
-  "Support farmers with modern agricultural techniques and market access",
-  "Empower women through skill development and self-help groups",
-  "Develop youth leadership through training programs and sports",
-  "Preserve and promote our cultural heritage and traditions",
-  "Provide legal aid and social welfare services to community members",
-  "Create employment opportunities through skill development and business networks",
-  "Maintain a comprehensive community census and member database",
+  {
+    icon: Heart,
+    titleEn: "Unity",
+    titleHi: "एकता",
+    titleGu: "એકતા",
+    descEn: "Strengthening bonds among community members across all regions and Gotras.",
+    descHi: "सभी क्षेत्रों एवं गोत्रों के समाज बंधुओं के बीच अटूट एकता व भाईचारे को सुदृढ़ करना।",
+    descGu: "તમામ ક્ષેત્રો અને ગોત્રોના સમાજ બંધુઓ વચ્ચે અખંડ એકતા અને ભાઈચારો સુદ્રઢ કરવો.",
+  },
+  {
+    icon: BookOpen,
+    titleEn: "Education",
+    titleHi: "शिक्षा",
+    titleGu: "શિક્ષણ",
+    descEn: "Promoting learning and knowledge as the foundation of progress.",
+    descHi: "शिक्षा एवं ज्ञान को समाज की प्रगति और स्वाभिमान का मूल आधार बनाना।",
+    descGu: "શિક્ષણ અને જ્ઞાનને સમાજની પ્રગતિ અને સ્વાભિમાનનો મુખ્ય આધાર બનાવવો.",
+  },
+  {
+    icon: Handshake,
+    titleEn: "Service",
+    titleHi: "सेवा",
+    titleGu: "સેવા",
+    descEn: "Selfless service to the community and society at large.",
+    descHi: "संसार एवं समाज के कल्याण हेतु निःस्वार्थ भाव से अनवरत सेवा।",
+    descGu: "સમાજ અને સમાજના કલ્યાણ માટે નિઃસ્વાર્થ ભાવથી અવિરત સેવા.",
+  },
+  {
+    icon: Shield,
+    titleEn: "Heritage",
+    titleHi: "विरासत",
+    titleGu: "વારસો",
+    descEn: "Preserving our rich cultural traditions and historical legacy.",
+    descHi: "आँजणा समाज के गौरवशाली इतिहास और खेत-खेड़ा खाप की पावन मर्यादाओं का संरक्षण।",
+    descGu: "આંજણા સમાજના ગૌરવશાળી ઇતિહાસ અને ખેત-ખેડા ખાપની મર્યાદાઓનું રક્ષણ.",
+  },
+  {
+    icon: Star,
+    titleEn: "Excellence",
+    titleHi: "उत्कृष्टता",
+    titleGu: "શ્રેષ્ઠતા",
+    descEn: "Pursuing excellence in every community initiative we undertake.",
+    descHi: "प्रत्येक सामाजिक, शैक्षणिक व प्रशासनिक प्रयास में उत्कृष्टता हासिल करना।",
+    descGu: "દરેક સામાજિક, શૈક્ષણિક અને પ્રશાસનિક પ્રયાસમાં શ્રેષ્ઠતા પ્રાપ્ત કરવી.",
+  },
+  {
+    icon: Users,
+    titleEn: "Empowerment",
+    titleHi: "सशक्तिकरण",
+    titleGu: "સશક્તિકરણ",
+    descEn: "Empowering every member with opportunities for growth.",
+    descHi: "किसानों, युवाओं और महिलाओं को प्रगति के नए अवसर उपलब्ध कराना।",
+    descGu: "ખેડૂતો, યુવાનો અને બહેનોને પ્રગતિની નવી તકો પૂરી પાડવી.",
+  },
 ];
 
 const timelineEvents = [
-  { year: "1948", title: "Foundation", description: "Anjana Jat Mahasabha was formally established with the goal of community unity and social reform." },
-  { year: "1965", title: "First Convention", description: "The first major community convention held in Jaipur with over 5,000 attendees." },
-  { year: "1980", title: "Scholarship Program", description: "Launch of the community scholarship program, initially supporting 50 students annually." },
-  { year: "1995", title: "Women Wing", description: "Formation of the Women Wing to champion women's empowerment and education." },
-  { year: "2005", title: "Youth Wing", description: "Establishment of the Youth Wing to engage and develop young community leaders." },
-  { year: "2015", title: "Digital Initiative", description: "Launch of the community website and digital membership system." },
-  { year: "2020", title: "COVID Relief", description: "Organized massive community relief during the pandemic, reaching 25,000+ families." },
-  { year: "2024", title: "50K Members", description: "Community membership crosses 50,000 active members across 12 states." },
+  {
+    year: "1948",
+    titleEn: "Foundation",
+    titleHi: "स्थापना",
+    titleGu: "સ્થાપના",
+    descEn: "Anjana Jat Mahasabha was formally established with the goal of community unity and social reform.",
+    descHi: "आँजणा जाट समाज के संगठन, एकता एवं सामाजिक सुधार हेतु महासभा की स्थापना।",
+    descGu: "આંજણા જાટ સમાજના સંગઠન, એકતા અને સામાજિક સુધાર માટે મહાસભાની સ્થાપના.",
+  },
+  {
+    year: "1965",
+    titleEn: "Historic Convention",
+    titleHi: "ऐतिहासिक महासम्मेलन",
+    titleGu: "ઐતિહાસિક મહાસંમેલન",
+    descEn: "First major community convention held with leaders and representatives from across states.",
+    descHi: "राजस्थान एवं गुजरात के प्रतिनिधियों की उपस्थिति में ऐतिहासिक अधिवेशन।",
+    descGu: "રાજસ્થાન અને ગુજરાતના પ્રતિનિધિઓની હાજરીમાં ઐતિહાસિક અધિવેશન.",
+  },
+  {
+    year: "1980",
+    titleEn: "Scholarship & Education Fund",
+    titleHi: "शिक्षा एवं छात्रवृत्ति कोष",
+    titleGu: "શિક્ષણ અને શિષ્યવૃત્તિ ફંડ",
+    descEn: "Launch of educational programs and student support initiatives.",
+    descHi: "प्रतिभावान छात्र-छात्राओं हेतु छात्रवृत्ति एवं शिक्षा सहयोग का शुभारंभ।",
+    descGu: "તેજસ્વી વિદ્યાર્થીઓ માટે શિષ્યવૃત્તિ અને શૈક્ષણિક સહાયની શરૂઆત.",
+  },
+  {
+    year: "2005",
+    titleEn: "Youth & Agrarian Network",
+    titleHi: "युवा एवं कृषक सशक्तिकरण",
+    titleGu: "યુવા અને કૃષિ સશક્તિકરણ",
+    descEn: "Formation of specialized committees for agrarian progress and youth guidance.",
+    descHi: "कृषक कल्याण एवं युवा प्रतिभाओं को प्रशासनिक सेवाओं में मार्गदर्शन।",
+    descGu: "ખેડૂત કલ્યાણ અને યુવા પ્રતિભાઓને સ્પર્ધાત્મક પરીક્ષાઓમાં માર્ગદર્શન.",
+  },
+  {
+    year: "2024",
+    titleEn: "Digital Identity & Global Connect",
+    titleHi: "डिजिटल परिचय एवं अखिल भारतीय विस्तार",
+    titleGu: "ડિજિટલ ઓળખ અને રાષ્ટ્રીય વિસ્તાર",
+    descEn: "Apex digital directory, verified membership ID system, and inter-state integration.",
+    descHi: "सत्यापित डिजिटल सदस्यता पहचान पत्र एवं 1000+ गाँवों की एकीकृत निर्देशिका।",
+    descGu: "પ્રમાણિત ડિજિટલ સભ્યપદ ઓળખપત્ર અને 1000+ ગામોની એકીકૃત નિર્દેશિકા.",
+  },
 ];
 
 export default function AboutPageClient() {
+  const { language, t } = useLanguage();
+
   return (
     <>
       <PageHero
-        title="About Us"
-        titleHi="हमारे बारे में"
-        subtitle="Dedicated to the unity, development, and empowerment of the Anjana Jat community since 1948."
-        breadcrumbs={[{ label: "About Us", href: "/about" }]}
+        title={t("navAboutUs")}
+        subtitle={
+          language === "hi"
+            ? "1948 से आँजणा जाट समाज की एकता, सांस्कृतिक विरासत और सर्वांगीण विकास हेतु समर्पित।"
+            : language === "gu"
+            ? "1948 થી આંજણા જાટ સમાજની એકતા, સાંસ્કૃતિક વારસો અને સર્વાંગી વિકાસ માટે સમર્પિત."
+            : "Dedicated to the unity, heritage, and holistic empowerment of the Anjana Jat community."
+        }
+        breadcrumbs={[{ label: t("navAboutUs"), href: "/about" }]}
       />
 
       {/* About Introduction */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-16 md:py-24 bg-[#FFF9EC] text-[#29211D]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -58,27 +138,25 @@ export default function AboutPageClient() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold gradient-text-maroon mb-6">
-                Who We Are
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#B52A12] mb-4 font-devanagari">
+                {language === "hi" ? "हमारा परिचय एवं स्वरूप" : language === "gu" ? "અમારો પરિચય" : "Who We Are"}
               </h2>
-              <div className="section-divider !mx-0 mb-6" />
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <div className="w-16 h-1 bg-[#D9A52B] mb-6 rounded-full" />
+              <div className="space-y-4 text-[#5C4E46] leading-relaxed text-sm sm:text-base">
                 <p>
-                  <strong className="text-foreground">Anjana Jat Mahasabha</strong> is a
-                  premier community organization that has been serving the Anjana Jat community
-                  for over seven decades. Founded in 1948, we are dedicated to uniting community
-                  members across India and working towards their collective welfare and development.
+                  <strong className="text-[#29211D]">{t("brandTitle")}</strong>{" "}
+                  {language === "hi"
+                    ? "समस्त आँजणा चौधरी जाट समाज का शीर्ष प्रतिनिधि संगठन है। यह संगठन राजस्थान, गुजरात एवं मध्य प्रदेश के लाखों समाज बंधुओं को एक सूत्र में पिरोते हुए समाज के स्वाभिमान, शिक्षा और उत्थान हेतु कार्यरत है।"
+                    : language === "gu"
+                    ? "સમગ્ર આંજણા ચૌધરી જાટ સમાજનું સર્વોચ્ચ પ્રતિનિધિ સંગઠન છે. આ સંગઠન રાજસ્થાન, ગુજરાત અને મધ્યપ્રદેશના લાખો સમાજ બંધુઓને એકતાંતણે બાંધતા સમાજના સ્વાભિમાન, શિક્ષણ અને પ્રગતિ માટે કાર્યરત છે."
+                    : "is the apex representative organization of the Anjana Chaudhari Jat community, uniting members across Rajasthan, Gujarat, and Madhya Pradesh in mutual respect, educational progress, and community empowerment."}
                 </p>
                 <p>
-                  Our organization operates across 12 states with a network of over 50,000 active
-                  members, 350+ connected villages, and numerous district-level committees.
-                  Through our diverse programs in education, healthcare, women empowerment,
-                  youth development, and social welfare, we strive to uplift every member of our community.
-                </p>
-                <p>
-                  We believe in the power of unity and collective action. Our community&apos;s rich
-                  heritage, cultural values, and traditions form the foundation upon which we build
-                  a progressive and inclusive future for generations to come.
+                  {language === "hi"
+                    ? "हमारा ध्येय समाज के प्रामाणिक इतिहास का संरक्षण करना, कृषि और किसानों के अधिकारों की रक्षा करना, तथा युवा पीढ़ी को उच्च शिक्षा व रोजगार के श्रेष्ठ अवसर उपलब्ध कराना है।"
+                    : language === "gu"
+                    ? "અમારું લક્ષ્ય સમાજના પ્રામાણિક ઇતિહાસનું રક્ષણ કરવું, ખેતી અને ખેડૂતોના અધિકારોનું જતન કરવું અને નવી પેઢીને શ્રેષ્ઠ શિક્ષણ અને કારકિર્દીની તકો આપવી છે."
+                    : "Our objective is to protect authentic lineage history, champion agricultural pride and farmer welfare, and open exceptional educational and vocational paths for the next generation."}
                 </p>
               </div>
             </motion.div>
@@ -88,35 +166,43 @@ export default function AboutPageClient() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="rounded-3xl bg-gradient-to-br from-saffron/15 via-maroon/10 to-gold/15 p-8 md:p-12 relative overflow-hidden"
+              className="rounded-3xl bg-white border-2 border-[#D9A52B]/50 p-8 md:p-10 relative overflow-hidden shadow-sm"
             >
-              <div className="absolute inset-0 cultural-pattern opacity-20" />
-              <div className="relative space-y-8">
+              <div className="relative space-y-6">
                 {/* Vision */}
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-xl bg-saffron/20 flex items-center justify-center">
-                    <Eye size={22} className="text-saffron" />
+                  <div className="w-12 h-12 shrink-0 rounded-xl bg-[#FAF2E0] border border-[#D9A52B]/40 flex items-center justify-center text-[#B52A12]">
+                    <Eye size={22} />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Our Vision</h3>
-                    <p className="text-sm text-muted-foreground">
-                      To be the most impactful and united community organization in India,
-                      setting benchmarks in education, social welfare, and cultural preservation.
+                    <h3 className="text-lg font-bold text-[#29211D] mb-1 font-devanagari">
+                      {language === "hi" ? "हमारा दृष्टिकोण" : language === "gu" ? "અમારો દ્રષ્ટિકોણ" : "Our Vision"}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#5C4E46] leading-relaxed">
+                      {language === "hi"
+                        ? "एक सुदृढ़, संगठित, शिक्षित एवं व्यसनरहित आँजणा समाज का निर्माण करना जो अपनी ऐतिहासिक परंपराओं पर गर्व करते हुए राष्ट्र निर्माण में अग्रणी रहे।"
+                        : language === "gu"
+                        ? "એક મજબૂત, સંગઠિત, શિક્ષિત અને વ્યસનમુક્ત આંજણા સમાજનું નિર્માણ કરવું જે પોતાના ઐતિહાસિક વારસા પર ગૌરવ સાથે રાષ્ટ્ર નિર્માણમાં અગ્રેસર રહે."
+                        : "To build a united, educated, addiction-free, and progressive community that honors historic heritage and plays a leading role in nation-building."}
                     </p>
                   </div>
                 </div>
 
                 {/* Mission */}
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-xl bg-maroon/20 flex items-center justify-center">
-                    <Target size={22} className="text-maroon" />
+                  <div className="w-12 h-12 shrink-0 rounded-xl bg-[#FAF2E0] border border-[#D9A52B]/40 flex items-center justify-center text-[#B52A12]">
+                    <Target size={22} />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Our Mission</h3>
-                    <p className="text-sm text-muted-foreground">
-                      To empower every member of the Anjana Jat community through accessible
-                      education, healthcare, economic opportunities, and the preservation of
-                      our cultural heritage while fostering unity and mutual support.
+                    <h3 className="text-lg font-bold text-[#29211D] mb-1 font-devanagari">
+                      {language === "hi" ? "हमारा ध्येय" : language === "gu" ? "અમારો સંકલ્પ" : "Our Mission"}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#5C4E46] leading-relaxed">
+                      {language === "hi"
+                        ? "सुलभ शिक्षा, स्वास्थ्य सहायता, आर्थिक सहयोग एवं सामाजिक समरसता के माध्यम से प्रत्येक समाज बंधु को सशक्त बनाना।"
+                        : language === "gu"
+                        ? "સુલભ શિક્ષણ, આરોગ્ય સહાય, આર્થિક સહયોગ અને સામાજિક સમરસતા દ્વારા દરેક સમાજ બંધુને સશક્ત બનાવવો."
+                        : "To empower every community member through accessible education, healthcare support, economic networks, and cultural solidarity."}
                     </p>
                   </div>
                 </div>
@@ -127,65 +213,38 @@ export default function AboutPageClient() {
       </section>
 
       {/* Values */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-16 md:py-24 bg-[#FAF2E0] border-t border-[#D9A52B]/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <SectionHeading
-            title="Our Core Values"
-            titleHi="हमारे मूल्य"
-            subtitle="The principles that guide our every action and decision."
+            title={language === "hi" ? "हमारे आधारभूत मूल्य" : language === "gu" ? "અમારા પાયાના મૂલ્યો" : "Our Core Values"}
+            subtitle={
+              language === "hi"
+                ? "वे सिद्धांत जो महासभा के प्रत्येक निर्णय और सेवा कार्य का मार्गदर्शन करते हैं।"
+                : language === "gu"
+                ? "તે સિદ્ધાંતો જે મહાસભાના દરેક નિર્ણય અને સેવા કાર્યનું માર્ગદર્શન કરે છે."
+                : "The guiding principles behind every community initiative and decision."
+            }
           />
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {values.map((value, index) => (
               <motion.div
-                key={value.title}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group rounded-2xl bg-card border border-border p-6 text-center hover-lift"
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="group rounded-2xl bg-white border border-[#D9A52B]/40 p-6 text-center hover:border-[#B52A12] shadow-xs hover:shadow-md transition-all"
               >
-                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-saffron/10 to-maroon/10 flex items-center justify-center group-hover:from-saffron/20 group-hover:to-maroon/20 transition-colors">
-                  <value.icon size={24} className="text-saffron" />
+                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-[#FAF2E0] border border-[#D9A52B]/50 flex items-center justify-center text-[#B52A12] group-hover:bg-[#B52A12] group-hover:text-white transition-colors">
+                  <value.icon size={22} />
                 </div>
-                <h3 className="text-base font-semibold text-foreground mb-1">
-                  {value.title}
+                <h3 className="text-base font-bold text-[#29211D] mb-1 font-devanagari">
+                  {language === "hi" ? value.titleHi : language === "gu" ? value.titleGu : value.titleEn}
                 </h3>
-                <p className="text-xs text-saffron font-devanagari mb-2">
-                  {value.titleHi}
+                <p className="text-xs text-[#5C4E46] leading-relaxed mt-2">
+                  {language === "hi" ? value.descHi : language === "gu" ? value.descGu : value.descEn}
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Objectives */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-6">
-          <SectionHeading
-            title="Our Objectives"
-            titleHi="हमारे उद्देश्य"
-            subtitle="Our roadmap for community development and empowerment."
-          />
-
-          <div className="grid md:grid-cols-2 gap-4">
-            {objectives.map((obj, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-20px" }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border hover:border-saffron/30 transition-colors"
-              >
-                <div className="w-7 h-7 shrink-0 rounded-full bg-gradient-to-br from-saffron to-maroon flex items-center justify-center text-white text-xs font-bold mt-0.5">
-                  {index + 1}
-                </div>
-                <p className="text-sm text-muted-foreground">{obj}</p>
               </motion.div>
             ))}
           </div>
@@ -193,48 +252,42 @@ export default function AboutPageClient() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="py-16 md:py-24 bg-[#FFF9EC] border-t border-[#D9A52B]/30">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <SectionHeading
-            title="Our Journey"
-            titleHi="हमारी यात्रा"
-            subtitle="Key milestones in our history of community service."
+            title={language === "hi" ? "गौरवशाली यात्रा के मुख्य पड़ाव" : language === "gu" ? "ગૌરવશાળી યાત્રાના મુખ્ય તબક્કા" : "Historic Milestones"}
+            subtitle={
+              language === "hi"
+                ? "समाज सेवा, संगठन एवं उत्थान के ऐतिहासिक मील के पत्थर।"
+                : language === "gu"
+                ? "સમાજ સેવા અને સંગઠનના ઐતિહાસિક તબક્કાઓ."
+                : "Key milestones in our history of community unity and progress."
+            }
           />
 
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-saffron via-maroon to-gold" />
-
-            <div className="space-y-8">
-              {timelineEvents.map((event, index) => (
-                <motion.div
-                  key={event.year}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className={`relative flex items-start gap-6 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Dot */}
-                  <div className="absolute left-6 md:left-1/2 w-3 h-3 rounded-full bg-saffron border-2 border-background transform -translate-x-1.5 mt-2 z-10" />
-
-                  {/* Content */}
-                  <div className={`ml-14 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? "md:pr-8 md:text-right" : "md:pl-8"}`}>
-                    <span className="inline-block px-3 py-1 rounded-full bg-saffron/10 text-saffron text-sm font-bold mb-2">
-                      {event.year}
-                    </span>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {event.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {event.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="space-y-6">
+            {timelineEvents.map((event, index) => (
+              <motion.div
+                key={event.year}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-[#D9A52B]/40 shadow-xs"
+              >
+                <div className="w-16 h-12 rounded-xl bg-[#FAF2E0] border border-[#D9A52B]/60 text-[#B52A12] font-black text-sm flex items-center justify-center shrink-0">
+                  {event.year}
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-[#29211D] font-devanagari">
+                    {language === "hi" ? event.titleHi : language === "gu" ? event.titleGu : event.titleEn}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#5C4E46] mt-1 leading-relaxed">
+                    {language === "hi" ? event.descHi : language === "gu" ? event.descGu : event.descEn}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

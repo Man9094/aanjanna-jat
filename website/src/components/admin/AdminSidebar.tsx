@@ -140,7 +140,7 @@ export default function AdminSidebar({ role }: { role: AdminRole }) {
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-xs lg:hidden"
+          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
           onClick={() => setMobileOpen(false)}
           aria-hidden="true"
         />

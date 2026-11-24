@@ -32,9 +32,8 @@ export default function LeaderCard({ leader, index, spotlight = false }: LeaderC
       >
         <div className="grid md:grid-cols-3 gap-0">
           {/* Photo */}
-          <div className="md:col-span-1 h-72 md:h-full bg-gradient-to-br from-saffron/20 via-maroon/15 to-gold/20 relative overflow-hidden flex items-center justify-center">
-            <div className="absolute inset-0 cultural-pattern opacity-20" />
-            <div className="w-36 h-36 rounded-full bg-gradient-to-br from-saffron to-maroon flex items-center justify-center text-white text-5xl font-bold shadow-xl">
+          <div className="md:col-span-1 h-72 md:h-full bg-[#FAF2E0] border-b md:border-b-0 md:border-r border-[#D9A52B]/40 relative overflow-hidden flex items-center justify-center">
+            <div className="w-36 h-36 rounded-full bg-[#B52A12] border-2 border-[#D9A52B] flex items-center justify-center text-white text-5xl font-bold shadow-sm">
               {leader.name.charAt(0)}
             </div>
           </div>
@@ -96,13 +95,13 @@ export default function LeaderCard({ leader, index, spotlight = false }: LeaderC
       className="group rounded-2xl bg-card border border-border p-6 text-center hover-lift"
     >
       {/* Avatar */}
-      <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-saffron/20 via-maroon/15 to-gold/20 flex items-center justify-center border-4 border-saffron/20 group-hover:border-saffron/40 transition-colors">
-        <span className="text-3xl font-bold text-saffron">
+      <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-[#FAF2E0] border-2 border-[#D9A52B]/60 flex items-center justify-center transition-colors">
+        <span className="text-3xl font-bold text-[#B52A12]">
           {leader.name.charAt(0)}
         </span>
       </div>
 
-      <h3 className="text-base font-semibold text-foreground group-hover:text-saffron transition-colors">
+      <h3 className="text-base font-bold text-[#29211D] group-hover:text-[#B52A12] transition-colors">
         {leader.name}
       </h3>
       <p className="text-xs text-muted-foreground font-devanagari mt-0.5">
